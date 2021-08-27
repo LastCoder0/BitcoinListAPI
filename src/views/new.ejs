@@ -1,0 +1,59 @@
+
+<div class="container">
+ <h3>Bitcoin Fiyat Listesi</h3>
+ <br>
+  <table class="table" id="tables" style="background-color:gainsboro;">
+    <thead>
+      <tr class="th">
+         <th> ID</th>
+        <th> İsmi</th>
+        <th>Değeri</th>
+          <th>24 % </th>
+          <th>7d % </th>
+        <th>Coin Toplam Arz</th>
+   
+   
+    </tr>
+    </thead>
+    <tbody id="lot">
+      <% API.data.forEach(coin => { %>
+        <tr>
+          <td><%-coin.id %> </td>
+          <td><%-coin.name %> </td>
+          <% let myCoinQuetoPrice24 = JSON.stringify(coin.quote.USD.percent_change_24h);
+          let myCoinQuetoPrice7 = JSON.stringify(coin.quote.USD.percent_change_7d); 
+          let myCoinQuetoPrice = JSON.stringify(coin.quote.USD.price); 
+
+          %> 
+          <td><%-myCoinQuetoPrice %> </td>
+          <%
+        let result24=myCoinQuetoPrice24.indexOf("-");
+        let result7=myCoinQuetoPrice24.indexOf("-");
+
+          if (result24==-1) { %>
+            <td style="color: green;"><%-myCoinQuetoPrice24+"%"%> </td>
+          <% }else {%>
+            <td style="color: red;"><%-myCoinQuetoPrice24+"%"%> </td>
+
+        <%  } %>
+        <%
+        if (result7==-1) { %>
+            <td style="color: green;"><%-myCoinQuetoPrice7+"%"%> </td>
+          <% }else {%>
+            <td style="color: red;"><%-myCoinQuetoPrice7+"%"%> </td>
+
+        <%  } %>
+          <td><%-coin.total_supply %> </td>
+        </tr>
+      <% }) %>
+     
+    </tbody>
+
+    
+
+   
+    
+   
+  </table>
+   
+  </div>
